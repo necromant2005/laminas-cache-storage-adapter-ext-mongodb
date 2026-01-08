@@ -21,6 +21,7 @@ use function assert;
 use function get_debug_type;
 use function is_array;
 use function is_iterable;
+use function is_object;
 use function microtime;
 use function round;
 use function sprintf;
@@ -247,8 +248,38 @@ final class ExtMongoDb extends AbstractMetadataCapableAdapter implements Flushab
      */
     public function flush(): bool
     {
-        $result = (object) $this->getMongoCollection()->drop();
-        return 1.0 === $result->ok;
+        try {
+            $result = $this->getMongoCollection()->drop();
+        } catch (MongoDriverException $e) {
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
+        }
+
+        return self::dropOperationSucceeded($result);
+    }
+
+    private static function dropOperationSucceeded(mixed $result): bool
+    {
+        if ($result === null) {
+            return true;
+        }
+
+        if ($result instanceof ArrayObject) {
+            $result = $result->getArrayCopy();
+        }
+
+        if (is_array($result)) {
+            if (! array_key_exists('ok', $result)) {
+                return true;
+            }
+
+            return 1.0 === (float) $result['ok'];
+        }
+
+        if (is_object($result) && isset($result->ok)) {
+            return 1.0 === (float) $result->ok;
+        }
+
+        return true;
     }
 
     /**

@@ -12,6 +12,7 @@ use Laminas\Cache\Storage\StorageInterface;
 use Laminas\Serializer\AdapterPluginManager;
 use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\Cache\Storage\Adapter\AbstractCacheItemPoolIntegrationTest;
+use LaminasTest\Cache\Storage\Adapter\Traits\CacheItemPoolDataProviderCompatibilityTrait;
 
 use function getenv;
 use function sprintf;
@@ -23,6 +24,8 @@ use function sprintf;
  */
 final class ExtMongoDbIntegrationTest extends AbstractCacheItemPoolIntegrationTest
 {
+    use CacheItemPoolDataProviderCompatibilityTrait;
+
     private const LONG_KEY_SUPPORT_POSTPONED = 'Long key support will be provided with a dedicated ticket.';
 
     protected function setUp(): void

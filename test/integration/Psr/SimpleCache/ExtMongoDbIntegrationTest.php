@@ -10,11 +10,14 @@ use Laminas\Cache\Storage\StorageInterface;
 use Laminas\Serializer\AdapterPluginManager;
 use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\Cache\Storage\Adapter\AbstractSimpleCacheIntegrationTest;
+use LaminasTest\Cache\Storage\Adapter\Traits\SimpleCacheDataProviderCompatibilityTrait;
 
 use function getenv;
 
 class ExtMongoDbIntegrationTest extends AbstractSimpleCacheIntegrationTest
 {
+    use SimpleCacheDataProviderCompatibilityTrait;
+
     protected function setUp(): void
     {
         $this->skippedTests['testBasicUsageWithLongKey'] = 'SimpleCacheDecorator requires keys to be <= 64 chars';

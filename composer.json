@@ -7,20 +7,20 @@
   ],
   "license": "BSD-3-Clause",
   "require": {
-    "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
-    "ext-mongodb": "^1.10",
-    "laminas/laminas-cache": "^4.0",
-    "mongodb/mongodb": "^1.12"
+    "php": "8.3.* || 8.4.*",
+    "ext-mongodb": "^1.20 || ^2.0",
+    "laminas/laminas-cache": "*",
+    "mongodb/mongodb": "^1.20 || ^2.0"
   },
   "provide": {
     "laminas/laminas-cache-storage-implementation": "2.0"
   },
   "require-dev": {
-    "laminas/laminas-cache-storage-adapter-test": "^4.0",
-    "laminas/laminas-coding-standard": "~3.0.0",
-    "laminas/laminas-serializer": "^3.0",
-    "psalm/plugin-phpunit": "^0.19.0",
-    "vimeo/psalm": "^5.18"
+    "laminas/laminas-cache-storage-adapter-test": "*",
+    "laminas/laminas-coding-standard": "*",
+    "laminas/laminas-serializer": "*",
+    "psalm/plugin-phpunit": "*",
+    "vimeo/psalm": "*"
   },
   "config": {
     "sort-packages": true,
@@ -28,7 +28,7 @@
       "dealerdirect/phpcodesniffer-composer-installer": true
     },
     "platform": {
-      "php": "8.1.99"
+      "php": "8.3.99"
     }
   },
   "extra": {
